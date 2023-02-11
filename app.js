@@ -30,8 +30,22 @@ document.getElementById("equals").addEventListener("click", function () {
       }
     }
 
-    console.log(result)
+    lastOutputField.setAttribute("value", lastOutputFieldValue);
+
+    let display = document.getElementById("output-holder");
+    display.innerHTML += '<input class="output-field" value="' + result + '">';
+
   } else {
     console.log("Input is not a string");
   }
 });
+
+let calcButtons = document.querySelectorAll('.reg-button');
+
+calcButtons.forEach((e) => {
+  e.addEventListener('click', () => {
+    let outputFields = document.querySelectorAll(".output-field");
+    let lastOutputField = outputFields[outputFields.length - 1];
+    lastOutputField.value += e.innerText;
+  })
+})
