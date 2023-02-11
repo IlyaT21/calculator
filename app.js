@@ -1,22 +1,36 @@
-document.getElementById("submitButton").addEventListener("click", function () {
-  let inputValue = document.getElementById("inputField").value;
+document.getElementById("equals").addEventListener("click", function () {
+  
+  let outputFields = document.querySelectorAll(".output-field");
+  let lastOutputField = outputFields[outputFields.length - 1];
+  let lastOutputFieldValue = lastOutputField.value;
 
-  if (typeof inputValue === "string") {
-    let substrings = [];
-    let currentString = "";
+  if (typeof lastOutputFieldValue === "string") {
+    let numbers = lastOutputFieldValue.split(/[+\-*/]/);
+    let operands = lastOutputFieldValue.match(/[+\-*/]/g);
 
-    for (let i = 0; i < inputValue.length; i++) {
-      let char = inputValue.charAt(i);
-      if (isNaN(char)) {
-        substrings.push(currentString);
-        currentString = "";
-      } else {
-        currentString += char;
+    let result = parseInt(numbers[0]);
+
+    for (let i = 0; i < operands.length; i++) {
+      let currentNumber = parseInt(numbers[i + 1]);
+      let currentOperand = operands[i];
+
+      switch (currentOperand) {
+        case "+":
+          result += currentNumber;
+          break;
+        case "-":
+          result -= currentNumber;
+          break;
+        case "*":
+          result *= currentNumber;
+          break;
+        case "/":
+          result /= currentNumber;
+          break;
       }
     }
 
-    substrings.push(currentString);
-    console.log(substrings);
+    console.log(result)
   } else {
     console.log("Input is not a string");
   }
