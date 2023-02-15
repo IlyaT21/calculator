@@ -35,6 +35,8 @@ document.getElementById("equals").addEventListener("click", function () {
     let display = document.getElementById("output-holder");
     display.innerHTML += '<input class="output-field" value="' + result + '">';
 
+    display.scrollTop = display.scrollHeight;
+
   } else {
     console.log("Input is not a string");
   }
